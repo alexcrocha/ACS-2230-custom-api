@@ -1,8 +1,6 @@
 const { User } = require("../models");
 const jwt = require("jsonwebtoken");
-
-const JWT_SECRET = process.env.JWT_SECRET;
-const JWT_EXPIRATION = process.env.JWT_EXPIRATION;
+const { jwtSecret, jwtExpiration } = require("../config");
 
 const register = async ({ username, password }) => {
   try {
@@ -24,7 +22,7 @@ const login = async ({ username, password }) => {
     if (!isMatch) {
       throw new Error('Invalid username or password!');
     }
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
+    const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: jwtExpiration });
     return { user, token };
   } catch (err) {
     throw err;
