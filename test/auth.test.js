@@ -1,19 +1,23 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { describe, it, beforeEach, afterEach } = require('mocha');
-const server = require('../src/index');
+const getServer = require('../src/index');
 
 const should = chai.should();
 
 chai.use(chaiHttp);
 
-// Agent that will keep track of our cookies
-const agent = chai.request.agent(server);
 
 const { User } = require('../src/models');
 
 describe('Auth', function () {
   let username;
+
+  before(async function () {
+    const server = await getServer;
+    // Agent that will keep track of our cookies
+    agent = chai.request.agent(server);
+  });
 
   beforeEach(() => {
     // Generate a unique username for each test
@@ -72,5 +76,9 @@ describe('Auth', function () {
     res.should.have.status(200);
     res.body.should.have.property('message').eql('Bye!');
     agent.should.not.have.cookie('nToken');
+  });
+
+  after(function () {
+    agent.close();
   });
 });

@@ -1,7 +1,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { describe, it, beforeEach, afterEach } = require('mocha');
-const server = require('../src/index');
+const getServer = require('../src/index');
 
 const should = chai.should();
 
@@ -9,10 +9,16 @@ chai.use(chaiHttp);
 
 const { Brand, Category } = require('../src/models');
 
+let server;
+
 describe('Brand', function () {
   let categoryName;
   let brandName;
   let categoryId;
+
+  before(async function () {
+    server = await getServer;
+  });
 
   beforeEach(async () => {
     categoryName = `TestCategory${Date.now()}`;
@@ -101,5 +107,9 @@ describe('Brand', function () {
 
     deleteRes.should.have.status(200);
     deleteRes.body.should.have.property('message').eql('Brand deleted successfully!');
+  });
+
+  after(function () {
+    server.close();
   });
 });
