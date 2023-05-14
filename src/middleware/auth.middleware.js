@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
     try {
       const decodedToken = jwt.verify(req.cookies.nToken, jwtSecret);
 
-      req.user = await User.findById(decodedToken.id);
+      req.user = await User.findById(decodedToken.userId);
       if (!req.user) {
         return res.status(400).json({ msg: 'User does not exist' });
       }
@@ -20,4 +20,3 @@ module.exports = async (req, res, next) => {
 
   next();
 };
-

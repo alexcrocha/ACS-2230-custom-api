@@ -42,6 +42,7 @@ describe('Category', function () {
 
     res.should.have.status(201);
     res.body.category.should.have.property('name').eql(categoryName);
+    await Category.deleteOne({ _id: res.body.category._id });
   });
 
   it('should be able to list categories', async function () {
@@ -57,6 +58,7 @@ describe('Category', function () {
     res.should.have.status(200);
     res.body.should.be.an('array');
     res.body.length.should.be.above(0);
+    await Category.deleteOne({ name: categoryName });
   });
 
   it('should be able to get a category by id', async function () {
@@ -73,6 +75,7 @@ describe('Category', function () {
 
     getRes.should.have.status(200);
     getRes.body.should.have.property('name').eql(categoryName);
+    await Category.deleteOne({ _id: categoryId });
   });
 
   it('should be able to update a category', async function () {
@@ -91,6 +94,7 @@ describe('Category', function () {
 
     putRes.should.have.status(200);
     putRes.body.category.should.have.property('name').eql(updatedCategoryName);
+    await Category.deleteOne({ _id: categoryId });
   });
 
   it('should be able to delete a category', async function () {

@@ -50,6 +50,7 @@ describe('Brand', function () {
     res.should.have.status(201);
     res.body.should.have.property('message').eql('Brand created successfully!');
     res.body.brand.should.have.property('name').eql(brandName);
+    await Brand.deleteOne({ _id: res.body.brand._id });
   });
 
   it('should be able to list brands of a category', async function () {
@@ -64,6 +65,7 @@ describe('Brand', function () {
 
     res.should.have.status(200);
     res.body.length.should.be.above(0);
+    await Brand.deleteOne({ name: brandName });
   });
 
   it('should be able to get a brand by id', async function () {
@@ -80,6 +82,7 @@ describe('Brand', function () {
 
     getRes.should.have.status(200);
     getRes.body.should.have.property('name').eql(brandName);
+    await Brand.deleteOne({ name: brandName });
   });
 
   it('should be able to update a brand', async function () {
