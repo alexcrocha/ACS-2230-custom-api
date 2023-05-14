@@ -43,7 +43,7 @@ describe('Auth', function () {
   it('should be able to register', async function () {
     const res = await agent
       .post('/v1/auth/register')
-      .send({ username, password: 'password' });
+      .send({ username: username, password: 'password' });
 
     res.should.have.status(200);
     res.body.should.have.property('message').eql('Register Successful!');

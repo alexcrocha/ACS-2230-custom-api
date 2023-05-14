@@ -1,21 +1,29 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const { describe, it, beforeEach, afterEach } = require('mocha');
+const { describe, it, before, beforeEach, afterEach } = require('mocha');
 const getServer = require('../src/index');
 
 const should = chai.should();
 
 chai.use(chaiHttp);
 
-const { Category } = require('../src/models');
+const { Category, User } = require('../src/models');
 
 let server;
 
 describe('Category', function () {
   let categoryName;
+  let username = `testuser${Date.now()}`;
 
   before(async function () {
     server = await getServer;
+
+    const res = await chai
+      .request(server)
+      .post('/v1/auth/register')
+      .send({ username: username, password: 'password' });
+
+    agent.jar.setCookie(`nToken=${res.body.token};`);
   });
 
   beforeEach(() => {
@@ -101,7 +109,8 @@ describe('Category', function () {
     deleteRes.body.should.have.property('message').eql('Category deleted successfully!');
   });
 
-  after(function () {
+  after(async function () {
+    await User.deleteOne({ username });
     server.close();
   });
 });

@@ -1,6 +1,9 @@
 const express = require("express");
 const { categoryController } = require("../../controllers");
+const { isAuth } = require("../../middleware");
 const router = express.Router();
+
+router.use(isAuth);
 
 router.post('/', categoryController.create);
 router.get('/', categoryController.list);

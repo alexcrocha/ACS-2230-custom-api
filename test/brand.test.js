@@ -7,7 +7,7 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-const { Brand, Category } = require('../src/models');
+const { Brand, Category, User } = require('../src/models');
 
 let server;
 
@@ -15,9 +15,17 @@ describe('Brand', function () {
   let categoryName;
   let brandName;
   let categoryId;
+  let username = `testuser${Date.now()}`;
 
   before(async function () {
     server = await getServer;
+
+    const res = await chai
+      .request(server)
+      .post('/v1/auth/register')
+      .send({ username: username, password: 'password' });
+
+    agent.jar.setCookie(`nToken=${res.body.token};`);
   });
 
   beforeEach(async () => {
@@ -109,7 +117,8 @@ describe('Brand', function () {
     deleteRes.body.should.have.property('message').eql('Brand deleted successfully!');
   });
 
-  after(function () {
+  after(async function () {
+    await User.deleteOne({ username });
     server.close();
   });
 });
