@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
 
       req.user = await User.findById(decodedToken.userId);
       if (!req.user) {
-        return res.status(400).json({ msg: 'User does not exist' });
+        return res.status(400).json({ msg: 'Invalid request' });
       }
     } catch (err) {
       return res.status(401).json({ msg: 'Invalid token', error: err });
