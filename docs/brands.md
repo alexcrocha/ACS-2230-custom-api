@@ -4,7 +4,7 @@
 
 ### Create Brand
 
-**Endpoint:** `/categories/:categoryId/brands`
+**Endpoint:** `/v1/categories/:categoryId/brands`
 
 **Method:** `POST`
 
@@ -14,7 +14,8 @@
 
 ```json
 {
-  "name": "string"
+  "name": "string",
+  "description": "string"
 }
 ```
 
@@ -24,15 +25,20 @@
 {
   "message": "Brand created successfully!",
   "brand": {
-    "id": "string",
-    "name": "string"
+    "_id": "string",
+    "name": "string",
+    "description": "string",
+    "category": {
+      "_id": "string",
+      "name": "string"
+    }
   }
 }
 ```
 
 ### List Brands
 
-**Endpoint:** `/categories/:categoryId/brands`
+**Endpoint:** `/v1/categories/:categoryId/brands`
 
 **Method:** `GET`
 
@@ -43,15 +49,20 @@
 ```json
 [
   {
-    "id": "string",
-    "name": "string"
+    "_id": "string",
+    "name": "string",
+    "description": "string",
+    "category": {
+      "_id": "string",
+      "name": "string"
+    }
   }
 ]
 ```
 
 ### Get Brand
 
-**Endpoint:** `/categories/:categoryId/brands/:id`
+**Endpoint:** `/v1/categories/:categoryId/brands/:id`
 
 **Method:** `GET`
 
@@ -61,14 +72,19 @@
 
 ```json
 {
-  "id": "string",
-  "name": "string"
+  "_id": "string",
+  "name": "string",
+  "description": "string",
+  "category": {
+    "_id": "string",
+    "name": "string"
+  }
 }
 ```
 
 ### Update Brand
 
-**Endpoint:** `/categories/:categoryId/brands/:id`
+**Endpoint:** `/v1/categories/:categoryId/brands/:id`
 
 **Method:** `PUT`
 
@@ -78,7 +94,8 @@
 
 ```json
 {
-  "name": "string"
+  "name": "string",
+  "description": "string",
 }
 ```
 
@@ -88,15 +105,20 @@
 {
   "message": "Brand updated successfully!",
   "brand": {
-    "id": "string",
-    "name": "string"
+    "_id": "string",
+    "name": "string",
+    "description": "string",
+    "category": {
+      "_id": "string",
+      "name": "string"
+    }
   }
 }
 ```
 
 ### Delete Brand
 
-**Endpoint:** `/categories/:categoryId/brands/:id`
+**Endpoint:** `/v1/categories/:categoryId/brands/:id`
 
 **Method:** `DELETE`
 

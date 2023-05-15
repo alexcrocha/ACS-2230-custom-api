@@ -4,7 +4,7 @@
 
 ### Create Category
 
-**Endpoint:** `/categories`
+**Endpoint:** `/v1/categories`
 
 **Method:** `POST`
 
@@ -24,15 +24,16 @@
 {
   "message": "Category created successfully!",
   "category": {
-    "id": "string",
-    "name": "string"
+    "_id": "string",
+    "name": "string",
+    "brands": []
   }
 }
 ```
 
 ### List Categories
 
-**Endpoint:** `/categories`
+**Endpoint:** `/v1/categories`
 
 **Method:** `GET`
 
@@ -43,15 +44,21 @@
 ```json
 [
   {
-    "id": "string",
-    "name": "string"
+    "_id": "string",
+    "name": "string",
+    "brands": [
+      {
+        "_id": "string",
+        "name": "string",
+      }
+    ]
   }
 ]
 ```
 
 ### Get Category
 
-**Endpoint:** `/categories/:id`
+**Endpoint:** `/v1/categories/:id`
 
 **Method:** `GET`
 
@@ -61,14 +68,20 @@
 
 ```json
 {
-  "id": "string",
-  "name": "string"
+  "_id": "string",
+  "name": "string",
+  "brands": [
+    {
+      "_id": "string",
+      "name": "string",
+    }
+  ]
 }
 ```
 
 ### Update Category
 
-**Endpoint:** `/categories/:id`
+**Endpoint:** `/v1/categories/:id`
 
 **Method:** `PUT`
 
@@ -88,15 +101,16 @@
 {
   "message": "Category updated successfully!",
   "category": {
-    "id": "string",
-    "name": "string"
+    "_id": "string",
+    "name": "string",
+    "brands": []
   }
 }
 ```
 
 ### Delete Category
 
-**Endpoint:** `/categories/:id`
+**Endpoint:** `/v1/categories/:id`
 
 **Method:** `DELETE`
 

@@ -4,7 +4,7 @@
 
 ### Register
 
-**Endpoint:** `/auth/register`
+**Endpoint:** `/v1/auth/register`
 
 **Method:** `POST`
 
@@ -31,7 +31,7 @@
 
 ### Login
 
-**Endpoint:** `/auth/login`
+**Endpoint:** `/v1/auth/login`
 
 **Method:** `POST`
 
@@ -58,7 +58,7 @@
 
 ### Logout
 
-**Endpoint:** `/auth/logout`
+**Endpoint:** `/v1/auth/logout`
 
 **Method:** `GET`
 
