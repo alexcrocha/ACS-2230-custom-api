@@ -4,7 +4,7 @@ const { jwtSecret } = require('../config');
 
 module.exports = async (req, res, next) => {
   if (typeof req.cookies.nToken === "undefined" || !req.cookies.nToken) {
-    req.user = null;
+    res.status(401).json({ msg: 'You are not authenticated' });
   } else {
     try {
       const decodedToken = jwt.verify(req.cookies.nToken, jwtSecret);
@@ -16,7 +16,6 @@ module.exports = async (req, res, next) => {
     } catch (err) {
       return res.status(401).json({ msg: 'Invalid token', error: err });
     }
+    next();
   }
-
-  next();
 };
