@@ -12,7 +12,7 @@ const create = async ({ name }) => {
 
 const list = async () => {
   try {
-    return await Category.find();
+    return await Category.find().populate('brands', 'name');
   } catch (err) {
     throw err;
   }
@@ -20,7 +20,7 @@ const list = async () => {
 
 const read = async (id) => {
   try {
-    return await Category.findById(id);
+    return await Category.findById(id).populate('brands', 'name');
   } catch (err) {
     throw err;
   }

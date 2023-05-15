@@ -1,7 +1,7 @@
 const express = require("express");
 const { brandController } = require("../../controllers");
 const { isAuth } = require("../../middleware");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router.use(isAuth);
 

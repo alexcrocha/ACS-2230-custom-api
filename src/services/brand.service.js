@@ -14,7 +14,7 @@ const create = async (categoryId, { name, description }) => {
 
 const list = async (categoryId) => {
   try {
-    return await Brand.find({ category: categoryId });
+    return await Brand.find({ category: categoryId }).populate('category', 'name');
   } catch (err) {
     throw err;
   }
@@ -22,7 +22,7 @@ const list = async (categoryId) => {
 
 const read = async (categoryId, id) => {
   try {
-    return await Brand.findOne({ _id: id, category: categoryId });
+    return await Brand.findOne({ _id: id, category: categoryId }).populate('category', 'name');
   } catch (err) {
     throw err;
   }
